@@ -14,6 +14,14 @@
 		BAD55BF12B4E7C47004004ED /* propertyKingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD55BF02B4E7C47004004ED /* propertyKingTests.swift */; };
 		BAD55BFB2B4E7C47004004ED /* propertyKingUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD55BFA2B4E7C47004004ED /* propertyKingUITests.swift */; };
 		BAD55BFD2B4E7C47004004ED /* propertyKingUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD55BFC2B4E7C47004004ED /* propertyKingUITestsLaunchTests.swift */; };
+		BAD55C0C2B4E810E004004ED /* BiometricModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD55C092B4E8101004004ED /* BiometricModel.swift */; };
+		BAD55C142B4FC492004004ED /* register.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD55C132B4FC492004004ED /* register.swift */; };
+		BAD55C162B4FCAAD004004ED /* Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD55C152B4FCAAD004004ED /* Login.swift */; };
+		BAD55C182B4FCF39004004ED /* home.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD55C172B4FCF39004004ED /* home.swift */; };
+		BAD55C1E2B4FE21D004004ED /* LocationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD55C1D2B4FE21D004004ED /* LocationModel.swift */; };
+		BAD55C202B4FE258004004ED /* MyLocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD55C1F2B4FE258004004ED /* MyLocationView.swift */; };
+		BAD55C222B4FED20004004ED /* firstPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD55C212B4FED20004004ED /* firstPage.swift */; };
+		BAD55C292B510F3D004004ED /* pic.png in Resources */ = {isa = PBXBuildFile; fileRef = BAD55C282B510F3D004004ED /* pic.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +52,14 @@
 		BAD55BF62B4E7C47004004ED /* propertyKingUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = propertyKingUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BAD55BFA2B4E7C47004004ED /* propertyKingUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = propertyKingUITests.swift; sourceTree = "<group>"; };
 		BAD55BFC2B4E7C47004004ED /* propertyKingUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = propertyKingUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		BAD55C092B4E8101004004ED /* BiometricModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BiometricModel.swift; sourceTree = "<group>"; };
+		BAD55C132B4FC492004004ED /* register.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = register.swift; sourceTree = "<group>"; };
+		BAD55C152B4FCAAD004004ED /* Login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Login.swift; sourceTree = "<group>"; };
+		BAD55C172B4FCF39004004ED /* home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = home.swift; sourceTree = "<group>"; };
+		BAD55C1D2B4FE21D004004ED /* LocationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationModel.swift; sourceTree = "<group>"; };
+		BAD55C1F2B4FE258004004ED /* MyLocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyLocationView.swift; sourceTree = "<group>"; };
+		BAD55C212B4FED20004004ED /* firstPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = firstPage.swift; sourceTree = "<group>"; };
+		BAD55C282B510F3D004004ED /* pic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pic.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,10 +110,17 @@
 		BAD55BDE2B4E7C44004004ED /* propertyKing */ = {
 			isa = PBXGroup;
 			children = (
+				BAD55C282B510F3D004004ED /* pic.png */,
+				BAD55C232B4FF027004004ED /* model */,
 				BAD55BDF2B4E7C44004004ED /* propertyKingApp.swift */,
 				BAD55BE12B4E7C44004004ED /* ContentView.swift */,
 				BAD55BE32B4E7C47004004ED /* Assets.xcassets */,
 				BAD55BE52B4E7C47004004ED /* Preview Content */,
+				BAD55C1F2B4FE258004004ED /* MyLocationView.swift */,
+				BAD55C132B4FC492004004ED /* register.swift */,
+				BAD55C152B4FCAAD004004ED /* Login.swift */,
+				BAD55C172B4FCF39004004ED /* home.swift */,
+				BAD55C212B4FED20004004ED /* firstPage.swift */,
 			);
 			path = propertyKing;
 			sourceTree = "<group>";
@@ -105,6 +128,7 @@
 		BAD55BE52B4E7C47004004ED /* Preview Content */ = {
 			isa = PBXGroup;
 			children = (
+				BAD55C092B4E8101004004ED /* BiometricModel.swift */,
 				BAD55BE62B4E7C47004004ED /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
@@ -125,6 +149,14 @@
 				BAD55BFC2B4E7C47004004ED /* propertyKingUITestsLaunchTests.swift */,
 			);
 			path = propertyKingUITests;
+			sourceTree = "<group>";
+		};
+		BAD55C232B4FF027004004ED /* model */ = {
+			isa = PBXGroup;
+			children = (
+				BAD55C1D2B4FE21D004004ED /* LocationModel.swift */,
+			);
+			path = model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -232,6 +264,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BAD55BE72B4E7C47004004ED /* Preview Assets.xcassets in Resources */,
+				BAD55C292B510F3D004004ED /* pic.png in Resources */,
 				BAD55BE42B4E7C47004004ED /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -257,8 +290,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BAD55C1E2B4FE21D004004ED /* LocationModel.swift in Sources */,
+				BAD55C182B4FCF39004004ED /* home.swift in Sources */,
+				BAD55C202B4FE258004004ED /* MyLocationView.swift in Sources */,
+				BAD55C0C2B4E810E004004ED /* BiometricModel.swift in Sources */,
+				BAD55C162B4FCAAD004004ED /* Login.swift in Sources */,
 				BAD55BE22B4E7C44004004ED /* ContentView.swift in Sources */,
 				BAD55BE02B4E7C44004004ED /* propertyKingApp.swift in Sources */,
+				BAD55C142B4FC492004004ED /* register.swift in Sources */,
+				BAD55C222B4FED20004004ED /* firstPage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -347,7 +387,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -404,7 +444,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -425,6 +465,7 @@
 				DEVELOPMENT_TEAM = VTJL63GVW6;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "$(PRODUCT_NAME)";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -454,6 +495,7 @@
 				DEVELOPMENT_TEAM = VTJL63GVW6;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "$(PRODUCT_NAME)";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
