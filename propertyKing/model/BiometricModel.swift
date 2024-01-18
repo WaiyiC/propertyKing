@@ -50,6 +50,7 @@ class BiometricModel : ObservableObject {
                 } else {
                     self.isError = false
                     self.isAuthenicated = true
+                    home()
                 }
             }
         })

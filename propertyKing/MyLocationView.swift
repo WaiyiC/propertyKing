@@ -9,6 +9,7 @@ import Foundation
 import SwiftUI
 import CoreLocation
 import MapKit
+import CoreLocationUI
 
 struct MyLocationView : View {
     
@@ -20,19 +21,25 @@ struct MyLocationView : View {
         VStack {
             if locationModel.authorizationStatus == .authorizedWhenInUse ||
                 locationModel.authorizationStatus == .authorizedAlways {
-                
-                Text("Lat: \(locationModel.lastLocation?.coordinate.latitude ?? 0)")
-                Text("Lng: \(locationModel.lastLocation?.coordinate.longitude ?? 0)")
-                
-                Map(coordinateRegion: $locationModel.coordinateRegion)
+                Map(coordinateRegion: $locationModel.coordinateRegion, showsUserLocation: true
+                  )
                 
             } else {
                 Button("Request Permisison", action: {
                     locationModel.requestPermission()
                 })
             }
+            
+            LocationButton {
+                locationModel.requestLocation()
+                  }
+                  .frame(height: 44)
+                  .padding()
+                  
+                 
+            .padding()
+            
         }
-        .padding()
     }
 }
 

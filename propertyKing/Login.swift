@@ -13,11 +13,16 @@ struct Login: View {
     @State private var wrongUname = 0
     @State private var wrongPwd = 0
     @State private var loginSuccess = false
-    @State private var showHome = false
-    
+    @State private var showPage : Bool = false
+    @StateObject var model = BiometricModel()
     
     var body: some View {
         NavigationView{
+            if model.isAuthenicated == true {
+                home()
+                    .navigationTitle("")
+                    .navigationBarHidden(false)
+            }else{
             VStack{
                 Text("Login")
                     .font(.largeTitle)
@@ -37,20 +42,46 @@ struct Login: View {
                     .cornerRadius(10)
                     .border(.red, width: CGFloat(wrongPwd))
                 
-                NavigationLink(destination: home()){
-                    Text("Login")
+                HStack{
+                    NavigationLink(destination: home()){
+                        Text("Login")
+                        
+                    }
+                    .foregroundColor(.white)
+                    .frame(width: 100, height: 50)
+                    .background(Color.green)
+                    .cornerRadius(10)
+                    
+                        
+                        Button(action: {
+                            model.evaluatePolicy()
+                        }, label: {
+                            Image(systemName: "faceid") 
+                                .resizable()
+                                .foregroundColor(.green)
+                                .frame(width: 50, height: 50)
+                                .cornerRadius(10)
+                        })
+                    
+                        if model.isError == true {
+                            Text("\(model.errorMessage)")
+                        }
+                        
+                            
+                    }
                 }
-                .foregroundColor(.white)
-                .frame(width: 100, height: 50)
-                .background(Color.green)
-                .cornerRadius(10)
-                
-                
             }
         }
         .navigationBarHidden(/*@START_MENU_TOKEN@*/false/*@END_MENU_TOKEN@*/)
     }
     
-    
+    func success(){
+        showPage = true
+        NavigationLink("", destination: home(), isActive: $showPage)
+        
+    }
 }
 
+#Preview {
+    Login()
+}

@@ -37,6 +37,10 @@ class LocationModel : NSObject, ObservableObject, CLLocationManagerDelegate {
         authorizationStatus = manager.authorizationStatus
     }
     
+    func requestLocation() {
+        locationManager.requestLocation()
+        }
+    
     //call back of Location Manager
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         DispatchQueue.main.async {
@@ -49,5 +53,8 @@ class LocationModel : NSObject, ObservableObject, CLLocationManagerDelegate {
                 
             }
         }
+    }
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print("Failed")
     }
 }

@@ -19,6 +19,10 @@ struct home: View {
                 Image(systemName: "ellipsis.bubble")
                 Text("Live chat")
             }).tag(2)
+            upload().tabItem({
+                            Image(systemName: "plus.circle")
+                            Text("Upload")
+                        }).tag(2)
             MyLocationView().tabItem({
                 Image(systemName: "location.square.fill")
                 Text("My Location")
@@ -27,10 +31,15 @@ struct home: View {
                 Image(systemName: "person.circle")
                 Text("Profile")
             }).tag(2)
+            
         }
     
 
         .navigationBarHidden(true)
     }
+}
+
+#Preview {
+    home()
 }
 

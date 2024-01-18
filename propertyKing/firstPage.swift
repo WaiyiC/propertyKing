@@ -11,62 +11,64 @@ struct firstPage: View {
     
     
     var body: some View {
-        
-        HStack {
-            VStack{
-                Image(uiImage: #imageLiteral(resourceName: "pic.png"))
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .frame(width: 70, height: 70)
-                    .cornerRadius(5)
-                    .padding(.leading, 8)
-                Text("title")
-                    .font(.headline)
-                    .lineLimit(1)
-            }
-            Spacer()
-            VStack{
+        NavigationView{
+            HStack {
+                VStack{
+                    Image(systemName: "house")
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .frame(width: 80, height: 80)
+                        .cornerRadius(5)
+                        .padding(.leading, 8)
+                    Text("Buy")
+                        .font(.headline)
+                        .lineLimit(1)
+                }
+                Spacer()
+                VStack{
+                    Image(systemName: "house")
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .frame(width: 80, height: 80)
+                        .cornerRadius(5)
+                        .padding(.leading, 8)
+                    Text("Buy")
+                        .font(.headline)
+                        .lineLimit(1)
+                }
+                Spacer()
                 
-                Image(uiImage: #imageLiteral(resourceName: "pic.png"))
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .frame(width: 70, height: 70)
-                    .cornerRadius(5)
-                    .padding(.leading, 8)
+                    VStack{
+                        Image(systemName: "house")
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(width: 80, height: 80)
+                            .cornerRadius(5)
+                            .padding(.leading, 8)
+                        Text("Buy")
+                            .font(.headline)
+                            .lineLimit(1)
+                    }
+                    Spacer()
+                    VStack{
+                        Image(systemName: "house")
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(width: 80, height: 80)
+                            .cornerRadius(5)
+                            .padding(.leading, 8)
+                        Text("Buy")
+                            .font(.headline)
+                            .lineLimit(1)
+                    }
+                    Spacer()
                 
-                Text("title")
-                    .font(.headline)
-                    .lineLimit(1)
             }
-            Spacer()
-            VStack{
-                Image(uiImage: #imageLiteral(resourceName: "pic.png"))
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .frame(width: 70, height: 70)
-                    .cornerRadius(5)
-                    .padding(.leading, 8)
-                Text("title")
-                    .font(.headline)
-                    .lineLimit(1)
-            }
-            Spacer()
-            VStack{
-                Image(uiImage: #imageLiteral(resourceName: "pic.png"))
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .frame(width: 70, height: 70)
-                    .cornerRadius(5)
-                    .padding(.leading, 8)
-                Text("title")
-                    .font(.headline)
-                    .lineLimit(1)
-            }
-            Spacer()
         }
-        .padding(.vertical, 8)
-        
     }
+}
+#Preview {
+    firstPage()
 }
 
 
