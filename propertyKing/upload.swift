@@ -6,32 +6,34 @@
 //
 
 import SwiftUI
+import PhotosUI
 
 struct upload: View {
-    @State var isPresenting: Bool = false
-    @State var uiImage: UIImage?
-    @State var sourceType: UIImagePickerController.SourceType = .photoLibrary
-    @State var imageArray = [UIImage()]
+
+    @State private var selectedItem: PhotosPickerItem?
+    @State private var selectedPhotoData: Data?
+    @State private var selectedItems: [PhotosPickerItem] = []
+    @State private var selectedPhotosData: [Data] = []
     
     var body: some View {
-        NavigationView{
+        NavigationStack{
             VStack{
-                HStack{
-                    Image(systemName: "photo")
-                        .onTapGesture {
-                            isPresenting = true
-                            sourceType = .photoLibrary
-                        }
-                    
-                    Image(systemName: "camera")
-                        .onTapGesture {
-                            isPresenting = true
-                            sourceType = .camera
-                        }
+                PhotosPicker(selection: $selectedItems, maxSelectionCount: 8, matching: .any(of: [.images, .not(.livePhotos)])) {
+                    Image(systemName: "photo.badge.plus.fill")
+                        .foregroundColor(.green)
                 }
-                .font(.largeTitle)
-                .foregroundColor(.blue)
-                
+                .onChange(of: selectedItems) { newItems in
+                    for newItem in newItems {
+
+                        Task {
+                            if let data = try? await newItem.loadTransferable(type: Data.self) {
+                                selectedPhotosData.append(data)
+                            }
+                        }
+
+                    }
+                }
+               
                 VStack{
                     HStack{
                         
@@ -40,96 +42,21 @@ struct upload: View {
                             .foregroundColor(.green.opacity(0.1))
                             .overlay(
                                 Group {
-                                    Image(systemName: "photo")
-                                        .onTapGesture {
-                                            isPresenting = true
-                                            sourceType = .photoLibrary
-                                        }
-                                    if uiImage != nil {
-                                        Image(uiImage: uiImage!)
-                                            .resizable()
-                                            .scaledToFit()
+                                    
                                     }
+                                )
                                 }
-                            )
-                        Rectangle()
-                            .strokeBorder()
-                            .foregroundColor(.green.opacity(0.1))
-                            .overlay(
-                                Group {
-                                    if uiImage != nil {
-                                        Image(uiImage: uiImage!)
-                                            .resizable()
-                                            .scaledToFit()
-                                    }
-                                }
-                            )
-                    }
-                    HStack{
-                        Rectangle()
-                            .strokeBorder()
-                            .foregroundColor(.green.opacity(0.1))
-                            .overlay(
-                                Group {
-                                    if uiImage != nil {
-                                        Image(uiImage: uiImage!)
-                                            .resizable()
-                                            .scaledToFit()
-                                    }
-                                }
-                            )
-                        Rectangle()
-                            .strokeBorder()
-                            .foregroundColor(.green.opacity(0.1))
-                            .overlay(
-                                Group {
-                                    if uiImage != nil {
-                                        Image(uiImage: uiImage!)
-                                            .resizable()
-                                            .scaledToFit()
-                                    }
-                                }
-                            )
+                            
+                       
                     }
                     
-                    HStack{
-                        Rectangle()
-                            .strokeBorder()
-                            .foregroundColor(.green.opacity(0.1))
-                            .overlay(
-                                Group {
-                                    if uiImage != nil {
-                                        Image(uiImage: uiImage!)
-                                            .resizable()
-                                            .scaledToFit()
-                                    }
-                                }
-                            )
-                        Rectangle()
-                            .strokeBorder()
-                            .foregroundColor(.green.opacity(0.1))
-                            .overlay(
-                                Group {
-                                    if uiImage != nil {
-                                        Image(uiImage: uiImage!)
-                                            .resizable()
-                                            .scaledToFit()
-                                    }
-                                }
-                            )
-                    }
-                }
-                
-                
-                .sheet(isPresented: $isPresenting){
-                    ImagePicker(uiImage: $uiImage, isPresenting: $isPresenting, sourceType: $sourceType)
                     
                 }
             }
             .padding()
         }
     }
-}
+
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
