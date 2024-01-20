@@ -19,7 +19,7 @@ struct ContentView: View {
     
     var body: some View {
         
-        NavigationView{
+        NavigationStack{
             VStack{
                 Image(uiImage: #imageLiteral(resourceName: "logo.png"))
                     .resizable()

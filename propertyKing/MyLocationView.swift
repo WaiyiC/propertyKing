@@ -22,22 +22,17 @@ struct MyLocationView : View {
             if locationModel.authorizationStatus == .authorizedWhenInUse ||
                 locationModel.authorizationStatus == .authorizedAlways {
                 Map(coordinateRegion: $locationModel.coordinateRegion, showsUserLocation: true
-                  )
-                
+                )
+                .tint(.green)
+                .mapControls {
+                    MapUserLocationButton()
+                }
             } else {
                 Button("Request Permisison", action: {
                     locationModel.requestPermission()
                 })
             }
-            
-            LocationButton {
-                locationModel.requestLocation()
-                  }
-                  .frame(height: 44)
-                  .padding()
-                  
-                 
-            .padding()
+           
             
         }
     }
