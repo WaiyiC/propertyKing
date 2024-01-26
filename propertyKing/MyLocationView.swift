@@ -21,8 +21,7 @@ struct MyLocationView : View {
         VStack {
             if locationModel.authorizationStatus == .authorizedWhenInUse ||
                 locationModel.authorizationStatus == .authorizedAlways {
-                Map(coordinateRegion: $locationModel.coordinateRegion, showsUserLocation: true
-                )
+                Map(coordinateRegion: $locationModel.coordinateRegion, showsUserLocation: true)
                 .tint(.green)
                 .mapControls {
                     MapUserLocationButton()
@@ -32,9 +31,8 @@ struct MyLocationView : View {
                     locationModel.requestPermission()
                 })
             }
-           
-            
         }
+        
     }
 }
 

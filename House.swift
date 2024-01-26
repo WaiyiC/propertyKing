@@ -7,12 +7,13 @@
 
 import SwiftUI
 
-struct House: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+struct House: Identifiable {
+    var id: String
+    var area:String
+    var easte:String
+    var hsetype:String
+    var price :String
+    var sell:String
+    var time:Date
     }
-}
 
-#Preview {
-    House()
-}

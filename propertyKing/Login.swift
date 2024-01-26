@@ -7,11 +7,32 @@
 
 import Foundation
 import SwiftUI
+
+@MainActor
+final class SingInWithEmail: ObservableObject{
+    @Published var email = ""
+    @Published var pwd = ""
+    
+    func register() async throws{
+        guard !email.isEmpty, !pwd.isEmpty else{
+            print("Email/Password not found")
+            return
+        }
+                try await AuthenticationManager.shared.creatUser(email: email, password: pwd)
+    }
+    
+    func signIn() async throws{
+        guard !email.isEmpty, !pwd.isEmpty else{
+            print("Email/Password not found")
+            return
+        }
+                try await AuthenticationManager.shared.signInUser(email: email, password: pwd)
+    }
+}
+
 struct Login: View {
-    @State private var uname = ""
-    @State private var pwd = ""
-    @State private var wrongUname = 0
-    @State private var wrongPwd = 0
+    @StateObject private var viewModel = SingInWithEmail()
+    @Binding var showSignInView : Bool
     @State private var loginSuccess = false
     @State private var showPage : Bool = false
     @StateObject var model = BiometricModel()
@@ -28,31 +49,38 @@ struct Login: View {
                     .font(.largeTitle)
                     .bold()
                     .padding()
-                TextField("Username", text: $uname)
+                TextField("Email", text: $viewModel.email)
                     .padding()
                     .frame(width:300, height: 50)
                     .background(Color.black.opacity(0.05))
                     .cornerRadius(10)
-                    .border(.red, width: CGFloat(wrongUname))
                 
-                SecureField("Password", text: $pwd)
+                SecureField("Password", text: $viewModel.pwd)
                     .padding()
                     .frame(width:300, height: 50)
                     .background(Color.black.opacity(0.05))
                     .cornerRadius(10)
-                    .border(.red, width: CGFloat(wrongPwd))
                 
                 HStack{
-                    NavigationLink(destination: home()){
+                    Button{
+                        Task{
+                            do{
+                                try await viewModel.signIn()
+                                showSignInView = false
+                                return
+                            }catch{
+                                print(error)
+                            }
+                        }
+                        
+                    } label: {
                         Text("Login")
-                        
+                        .foregroundColor(.white)
+                        .frame(width: 100, height: 50)
+                        .background(Color.green)
+                        .cornerRadius(10)
                     }
-                    .foregroundColor(.white)
-                    .frame(width: 100, height: 50)
-                    .background(Color.green)
-                    .cornerRadius(10)
                     
-                        
                         Button(action: {
                             model.evaluatePolicy()
                         }, label: {
@@ -74,14 +102,4 @@ struct Login: View {
         }
         .navigationBarHidden(/*@START_MENU_TOKEN@*/false/*@END_MENU_TOKEN@*/)
     }
-    
-    func success(){
-        showPage = true
-        NavigationLink("", destination: home(), isActive: $showPage)
-        
-    }
-}
-
-#Preview {
-    Login()
 }

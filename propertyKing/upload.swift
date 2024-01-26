@@ -7,8 +7,18 @@
 
 import SwiftUI
 import PhotosUI
+import CoreData
+
 
 struct upload: View {
+    @EnvironmentObject var dataManager : DataManager
+    @Environment(\.managedObjectContext) private var viewContext
+    @FetchRequest(
+        sortDescriptors: [NSSortDescriptor(keyPath: \HouseInfo.timestamp, ascending: true)],
+        animation: .default)
+    private var houseInfo: FetchedResults<HouseInfo>
+    
+    @State private var showAlert = false
     
     @State private var selectedItem: PhotosPickerItem?
     @State private var selectedPhotoData: Data?
@@ -30,7 +40,10 @@ struct upload: View {
     let Area = ["HONG KONG", "KOWLOON", "NEW TERRITORIES"]
     @State private var selectedarea = 0
     
+    @Binding var showPopup : Bool
     
+    var today = Date() // gets the current date & time
+
     var body: some View {
         NavigationStack{
             VStack{
@@ -41,7 +54,6 @@ struct upload: View {
                 }
                 .onChange(of: selectedItems) { newItems in
                     for newItem in newItems {
-                        
                         Task {
                             if let data = try? await newItem.loadTransferable(type: Data.self) {
                                 selectedPhotosData.append(data)
@@ -55,7 +67,6 @@ struct upload: View {
                     .frame(width: 350, height: 200)
                     .overlay(
                         ScrollView(.horizontal) {
-                            
                             Group {
                                 HStack {
                                     ForEach(selectedPhotosData, id: \.self) {
@@ -97,8 +108,8 @@ struct upload: View {
                                 }
                                 
                                 HStack{
-                                    Text("Easte")
-                                    TextField("Easte", text:$easte)
+                                    Text("District")
+                                    TextField("District", text:$easte)
                                         .font(.system(size: 20))
                                         .frame(height: 30)
                                         .multilineTextAlignment(.trailing)
@@ -115,15 +126,52 @@ struct upload: View {
                     }
                     .frame(width: 450)
                     .scrollContentBackground(.hidden)
-                    .scrollDisabled(true)
                 }
+                HStack {
+                    Button(action: {
+                        if price != "" && easte != "" {
+                            dataManager.addNew(hsetype: House[selectedhouse],
+                                               sell: selling[selectedSell],
+                                               area: Area[selectedarea],
+                                               easte: easte,
+                                               price: price,
+                                               time: Date())
+                            
+                            showPopup = false
+                        }else{
+                            showAlert = true
+                        }
+                    }, label: {
+                        Text("Save")
+                    })
+                    
+                    .alert("Please Input Price and Easte", isPresented: $showAlert) {
+                        Button("OK", role: .cancel) { }
+                    }
+                    Button(action: {
+                            showPopup = false
+                    }, label: {
+                        Text("Cancel")
+                    })
+                    .padding(.horizontal)
+                }
+                Spacer()
             }
         }
+        
     }
+    
+    
+    
+    private let itemFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .short
+        formatter.timeStyle = .medium
+        return formatter
+    }()
+    
+    
 }
-
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        upload()
-    }
+#Preview {
+    upload(showPopup: .constant(false))
 }

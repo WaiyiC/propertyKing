@@ -27,6 +27,7 @@ class LocationModel : NSObject, ObservableObject, CLLocationManagerDelegate {
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.startUpdatingLocation()
+        locationManager.stopUpdatingLocation()
     }
     
     func requestPermission() {

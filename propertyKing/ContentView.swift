@@ -8,11 +8,8 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var uname = ""
-    @State private var pwd = ""
-    @State private var wrongUname = 0
-    @State private var wrongPwd = 0
-    @State private var showLogin = false
+    
+    @State private var showSignInView = false
     @State private var showReg = false
     @State private var shoeHome = false
     
@@ -27,7 +24,7 @@ struct ContentView: View {
                     .frame(width: 320, height: 320)
                 
                 
-                NavigationLink(destination: Login()){
+                NavigationLink(destination: Login(showSignInView: $showSignInView)){
                     Text("Login")
                 }
                 .foregroundColor(.white)
@@ -36,7 +33,7 @@ struct ContentView: View {
                 .cornerRadius(10)
                 .navigationBarHidden(/*@START_MENU_TOKEN@*/false/*@END_MENU_TOKEN@*/)
                 
-                NavigationLink(destination: register()){
+                NavigationLink(destination: register(showSignInView: $showSignInView)){
                     Text("Register")
                 }
                 .foregroundColor(.white)

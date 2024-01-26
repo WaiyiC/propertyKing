@@ -6,69 +6,55 @@
 //
 
 import SwiftUI
+import UIKit
+import CoreData
 
 struct firstPage: View {
     
-    
+    @EnvironmentObject var dataManager : DataManager
     var body: some View {
-        NavigationView{
-            HStack {
-                VStack{
-                    Image(systemName: "house")
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                        .frame(width: 80, height: 80)
-                        .cornerRadius(5)
-                        .padding(.leading, 8)
-                    Text("Buy")
-                        .font(.headline)
-                        .lineLimit(1)
-                }
-                Spacer()
-                VStack{
-                    Image(systemName: "house")
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                        .frame(width: 80, height: 80)
-                        .cornerRadius(5)
-                        .padding(.leading, 8)
-                    Text("Buy")
-                        .font(.headline)
-                        .lineLimit(1)
-                }
-                Spacer()
-                
-                    VStack{
-                        Image(systemName: "house")
-                            .resizable()
-                            .aspectRatio(contentMode: .fill)
-                            .frame(width: 80, height: 80)
-                            .cornerRadius(5)
-                            .padding(.leading, 8)
-                        Text("Buy")
-                            .font(.headline)
-                            .lineLimit(1)
+        NavigationStack{
+            List{
+                Section() {
+                    ForEach(dataManager.house, id: \.time) {house in
+                        HStack{
+                            Rectangle()
+                                .strokeBorder()
+                                .foregroundColor(.green.opacity(0.9))
+                                .frame(width: 150, height: 150)
+                            VStack{
+                                Text((house.time).formatted(date:.numeric,time:.standard))
+                                HStack{
+                                    
+                                    //Text("\(house.time)")
+                                    Text(house.sell)
+                                    Text(house.hsetype)
+                                }
+                                .font(.headline)
+                                HStack{
+                                    Text(house.area)
+                                }
+                                HStack{
+                                    Text(house.easte)
+                                }
+                                HStack{
+                                    Text("$"+house.price)
+                                }
+                            }.frame(height: 100)
+                        }
+                        .navigationTitle("Find Your Dream House")
                     }
-                    Spacer()
-                    VStack{
-                        Image(systemName: "house")
-                            .resizable()
-                            .aspectRatio(contentMode: .fill)
-                            .frame(width: 80, height: 80)
-                            .cornerRadius(5)
-                            .padding(.leading, 8)
-                        Text("Buy")
-                            .font(.headline)
-                            .lineLimit(1)
-                    }
-                    Spacer()
-                
+                }
+                .scrollContentBackground(.hidden)
             }
         }
     }
 }
+
+
 #Preview {
     firstPage()
+        .environmentObject(DataManager())
 }
 
 
