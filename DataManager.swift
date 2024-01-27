@@ -8,6 +8,7 @@
 import Foundation
 import Firebase
 import FirebaseFirestore
+import Combine
 
 class DataManager : ObservableObject{
     @Published var house = [House]()
@@ -25,6 +26,7 @@ class DataManager : ObservableObject{
                 print(error!.localizedDescription)
                 return
             }
+            
             if let snapshot = snapshot{
                 for document in snapshot.documents {
                     let data = document.data()
@@ -50,6 +52,33 @@ class DataManager : ObservableObject{
         ref.setData(["hsetype": hsetype,"sell": sell, "area": area, "easte": easte, "price": price,"time":Date()]) { error in
             if let error = error{
                 print(error.localizedDescription)
+            }
+        }
+    }
+    func listener(){
+        let database = Firestore.firestore()
+       
+        database.collection("house").addSnapshotListener { querySnapshot, error in
+            guard let document = querySnapshot?.documents, error == nil else{
+                
+                return
+            }
+            
+            if let snapshot = querySnapshot{
+                for document in snapshot.documents {
+                    let data = document.data()
+                    
+                    let id = data["id"] as? String ?? ""
+                    let area = data["area"] as? String ?? ""
+                    let easte = data["easte"] as? String ?? ""
+                    let hsetype = data["hsetype"] as? String ?? ""
+                    let price = data["price"] as? String ?? ""
+                    let sell = data["sell"] as? String ?? ""
+                    let time = data["time"] as? Date
+                    
+                    let houses = House(id: id, area: area, easte: easte, hsetype:hsetype, price: price, sell: sell,time:Date())
+                    self.house.append(houses)
+                }
             }
         }
     }
