@@ -8,13 +8,15 @@
 import SwiftUI
 import UIKit
 import CoreData
+import Firebase
 
 struct firstPage: View {
-    
+    var db: Firestore!
     @EnvironmentObject var dataManager : DataManager
     var body: some View {
         NavigationStack{
             List{
+                
                 Section() {
                     ForEach(dataManager.house, id: \.time) {house in
                         HStack{
@@ -23,7 +25,7 @@ struct firstPage: View {
                                 .foregroundColor(.green.opacity(0.9))
                                 .frame(width: 150, height: 150)
                             VStack{
-                                Text((house.time).formatted(date:.numeric,time:.standard))
+                               // Text((house.time).formatted(date:.numeric,time:.standard))
                                 HStack{
                                     
                                     //Text("\(house.time)")
@@ -49,6 +51,14 @@ struct firstPage: View {
             }
         }
     }
+    private func orderAndLimitDesc() {
+        let house = db.collection("house")
+
+        // [START order_and_limit_desc]
+        house.order(by: "time", descending: true).limit(to: 3)
+        // [END order_and_limit_desc]
+      }
+
 }
 
 

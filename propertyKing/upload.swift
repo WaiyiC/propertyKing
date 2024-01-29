@@ -8,7 +8,7 @@
 import SwiftUI
 import PhotosUI
 import CoreData
-
+import FirebaseStorage
 
 struct upload: View {
     @EnvironmentObject var dataManager : DataManager
@@ -42,15 +42,24 @@ struct upload: View {
     
     @Binding var showPopup : Bool
     
-    var today = Date() // gets the current date & time
+    @State var data: Data?
+    let storageReference = Storage.storage().reference().child("\(UUID().uuidString)")
 
+    var today = Date() // gets the current date & time
+    
     var body: some View {
         NavigationStack{
             VStack{
                 PhotosPicker(selection: $selectedItems, maxSelectionCount: 8, matching: .any(of: [.images, .not(.livePhotos)])) {
-                    Image(systemName: "photo.badge.plus.fill")
-                        .foregroundColor(.green)
-                        .font(.largeTitle)
+                    if let data = data, let image = UIImage(data: data) {
+                        Image(systemName: "photo.badge.plus.fill")
+                            .foregroundColor(.green)
+                            .font(.largeTitle)
+                    }else {
+                        Image(systemName: "photo.badge.plus.fill")
+                            .foregroundColor(.green)
+                            .font(.largeTitle)
+                    }
                 }
                 .onChange(of: selectedItems) { newItems in
                     for newItem in newItems {
@@ -59,6 +68,21 @@ struct upload: View {
                                 selectedPhotosData.append(data)
                             }
                         }
+                    }
+                        
+                    guard let item = selectedItems.first else {
+                        return
+                    }
+                    item.loadTransferable(type: Data.self) { result in
+                        switch result {
+                        case .success(let data):
+                            if let data = data {
+                                self.data = data
+                            }
+                        case .failure(let failure):
+                            print("Error: \(failure.localizedDescription)")
+                        }
+                        
                     }
                 }
                 Rectangle()
@@ -136,20 +160,30 @@ struct upload: View {
                                                easte: easte,
                                                price: price,
                                                time: Date())
-                            
                             showPopup = false
+                            
+                            storageReference.putData(data!, metadata: nil) { (metadata, error) in
+                                guard let metadata = metadata else {
+                                    return
+                                }
+                            }
+                        
+                    
                         }else{
                             showAlert = true
                         }
+                        dataManager.house.removeAll()
+                        dataManager.listener()
                     }, label: {
                         Text("Save")
                     })
-                    
                     .alert("Please Input Price and Easte", isPresented: $showAlert) {
                         Button("OK", role: .cancel) { }
                     }
+                    .disabled(data == nil)
+                    
                     Button(action: {
-                            showPopup = false
+                        showPopup = false
                     }, label: {
                         Text("Cancel")
                     })
@@ -158,19 +192,13 @@ struct upload: View {
                 Spacer()
             }
         }
-        
     }
-    
-    
-    
-    private let itemFormatter: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.dateStyle = .short
-        formatter.timeStyle = .medium
-        return formatter
-    }()
-    
-    
+    //    private let itemFormatter: DateFormatter = {
+    //        let formatter = DateFormatter()
+    //        formatter.dateStyle = .short
+    //        formatter.timeStyle = .medium
+    //        return formatter
+    //    }()
 }
 #Preview {
     upload(showPopup: .constant(false))

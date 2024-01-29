@@ -6,14 +6,17 @@
 //
 
 import SwiftUI
+import Firebase
+import Foundation
+import FirebaseFirestore
 
-struct House: Identifiable {
+struct House: Codable, Identifiable {
     var id: String
     var area:String
     var easte:String
     var hsetype:String
     var price :String
     var sell:String
-    var time:Date
+    @ServerTimestamp var time: Timestamp?
     }
 

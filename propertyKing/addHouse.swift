@@ -17,7 +17,6 @@ struct addHouse: View {
         
         NavigationStack{
             List{
-                Section() {
                 ForEach(dataManager.house, id: \.time) {house in
                         HStack{
                             Rectangle()
@@ -25,10 +24,9 @@ struct addHouse: View {
                                 .foregroundColor(.green.opacity(0.9))
                                 .frame(width: 150, height: 150)
                             VStack{
-                                Text((house.time).formatted(date:.numeric,time:.standard))
                                 HStack{
                                     
-                                    //Text("\(house.time)")
+                                    //Text(house.time)
                                     Text(house.sell)
                                     Text(house.hsetype)
                                 }
@@ -56,9 +54,7 @@ struct addHouse: View {
                         NavigationStack{
                             upload(showPopup: $showPopup)
                         }
-                    }
                 }
-                
             }
             .scrollContentBackground(.hidden)
         }

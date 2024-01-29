@@ -8,13 +8,13 @@
 import Foundation
 import Firebase
 import FirebaseFirestore
-import Combine
 
 class DataManager : ObservableObject{
     @Published var house = [House]()
     
     init(){
         fetchHouse()
+       // listener()
     }
     
     func fetchHouse(){
@@ -37,9 +37,9 @@ class DataManager : ObservableObject{
                     let hsetype = data["hsetype"] as? String ?? ""
                     let price = data["price"] as? String ?? ""
                     let sell = data["sell"] as? String ?? ""
-                    let time = data["time"] as? Date
+                    let time = data["time"] as? Timestamp??
                     
-                    let houses = House(id: id, area: area, easte: easte, hsetype:hsetype, price: price, sell: sell,time:Date())
+                    let houses = House(id: id, area: area, easte: easte, hsetype:hsetype, price: price, sell: sell,time:Timestamp())
                     self.house.append(houses)
                 }
             }
@@ -47,9 +47,10 @@ class DataManager : ObservableObject{
     }
     
     func addNew(hsetype: String,sell: String, area: String, easte: String, price: String, time:Date){
+        let time = Date().formatted(.iso8601.year().month().day())
         let db = Firestore.firestore()
-        let ref = db.collection("house").document()
-        ref.setData(["hsetype": hsetype,"sell": sell, "area": area, "easte": easte, "price": price,"time":Date()]) { error in
+        let ref = db.collection("house").document(time)
+        ref.setData(["hsetype": hsetype,"sell": sell, "area": area, "easte": easte, "price": price,"time":Timestamp()]) { error in
             if let error = error{
                 print(error.localizedDescription)
             }
@@ -76,10 +77,16 @@ class DataManager : ObservableObject{
                     let sell = data["sell"] as? String ?? ""
                     let time = data["time"] as? Date
                     
-                    let houses = House(id: id, area: area, easte: easte, hsetype:hsetype, price: price, sell: sell,time:Date())
+                    let houses = House(id: id, area: area, easte: easte, hsetype:hsetype, price: price, sell: sell,time:Timestamp())
                     self.house.append(houses)
                 }
             }
         }
+    }
+    
+    func deleteHouse(){
+        let db = Firestore.firestore()
+            db.collection("house").document().delete()
+        
     }
 }
