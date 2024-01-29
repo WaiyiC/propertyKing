@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		BA4713BD2B5C1DD3006A4EEE /* houseInfo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BA4713BB2B5C1DD2006A4EEE /* houseInfo.xcdatamodeld */; };
+		BA48E4522B67D9950091E2DA /* addPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA48E4512B67D9950091E2DA /* addPhoto.swift */; };
 		BA4ECA682B5C20670076FB80 /* HouseInfo+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4ECA662B5C20670076FB80 /* HouseInfo+CoreDataClass.swift */; };
 		BA4ECA692B5C20670076FB80 /* HouseInfo+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4ECA672B5C20670076FB80 /* HouseInfo+CoreDataProperties.swift */; };
 		BA4ECA6B2B5C257A0076FB80 /* update.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4ECA6A2B5C257A0076FB80 /* update.swift */; };
@@ -72,6 +73,7 @@
 
 /* Begin PBXFileReference section */
 		BA4713BC2B5C1DD3006A4EEE /* houseInfo.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = houseInfo.xcdatamodel; sourceTree = "<group>"; };
+		BA48E4512B67D9950091E2DA /* addPhoto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = addPhoto.swift; sourceTree = "<group>"; };
 		BA4ECA662B5C20670076FB80 /* HouseInfo+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HouseInfo+CoreDataClass.swift"; sourceTree = "<group>"; };
 		BA4ECA672B5C20670076FB80 /* HouseInfo+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HouseInfo+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		BA4ECA6A2B5C257A0076FB80 /* update.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = update.swift; sourceTree = "<group>"; };
@@ -203,6 +205,7 @@
 				BA4ECA892B5FC6460076FB80 /* root.swift */,
 				BA4ECA8B2B5FD7080076FB80 /* SingInWithEmail.swift */,
 				BA4ECAE62B60BE790076FB80 /* test.swift */,
+				BA48E4512B67D9950091E2DA /* addPhoto.swift */,
 			);
 			path = propertyKing;
 			sourceTree = "<group>";
@@ -411,6 +414,7 @@
 				BAD55C162B4FCAAD004004ED /* Login.swift in Sources */,
 				BA4713BD2B5C1DD3006A4EEE /* houseInfo.xcdatamodeld in Sources */,
 				BA4ECA8C2B5FD7080076FB80 /* SingInWithEmail.swift in Sources */,
+				BA48E4522B67D9950091E2DA /* addPhoto.swift in Sources */,
 				BAD55BE22B4E7C44004004ED /* ContentView.swift in Sources */,
 				BA57AB5F2B56728A005B7390 /* ImagePicker.swift in Sources */,
 				BAD55BE02B4E7C44004004ED /* propertyKingApp.swift in Sources */,

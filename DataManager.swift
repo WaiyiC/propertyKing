@@ -8,10 +8,10 @@
 import Foundation
 import Firebase
 import FirebaseFirestore
+import FirebaseStorage
 
 class DataManager : ObservableObject{
     @Published var house = [House]()
-    
     init(){
         fetchHouse()
        // listener()
@@ -20,7 +20,7 @@ class DataManager : ObservableObject{
     func fetchHouse(){
         house.removeAll()
         let db = Firestore.firestore()
-        let ref = db.collection("house")
+        let ref = db.collection("house").order(by: "time", descending: true)
         ref.getDocuments { snapshot, error in
             guard error == nil else{
                 print(error!.localizedDescription)
@@ -38,6 +38,7 @@ class DataManager : ObservableObject{
                     let price = data["price"] as? String ?? ""
                     let sell = data["sell"] as? String ?? ""
                     let time = data["time"] as? Timestamp??
+                    let image = data["image"] as? [String] ?? []
                     
                     let houses = House(id: id, area: area, easte: easte, hsetype:hsetype, price: price, sell: sell,time:Timestamp())
                     self.house.append(houses)
@@ -47,13 +48,14 @@ class DataManager : ObservableObject{
     }
     
     func addNew(hsetype: String,sell: String, area: String, easte: String, price: String, time:Date){
-        let time = Date().formatted(.iso8601.year().month().day())
+        let time = Date().formatted(.iso8601.year().month().day().time(includingFractionalSeconds: true))
         let db = Firestore.firestore()
-        let ref = db.collection("house").document(time)
-        ref.setData(["hsetype": hsetype,"sell": sell, "area": area, "easte": easte, "price": price,"time":Timestamp()]) { error in
+        let ref = db.collection("house").document()
+        ref.setData(["hsetype": hsetype,"sell": sell, "area": area, "easte": easte, "price": price,"time":Timestamp()])
+        { error in
             if let error = error{
                 print(error.localizedDescription)
-            }
+            }            
         }
     }
     func listener(){
@@ -76,6 +78,7 @@ class DataManager : ObservableObject{
                     let price = data["price"] as? String ?? ""
                     let sell = data["sell"] as? String ?? ""
                     let time = data["time"] as? Date
+                    let image = data["image"] as? [String] ?? []
                     
                     let houses = House(id: id, area: area, easte: easte, hsetype:hsetype, price: price, sell: sell,time:Timestamp())
                     self.house.append(houses)

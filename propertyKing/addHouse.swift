@@ -13,8 +13,6 @@ struct addHouse: View {
     @State private var showPopup = false
     
     var body: some View {
-
-        
         NavigationStack{
             List{
                 ForEach(dataManager.house, id: \.time) {house in
@@ -25,8 +23,6 @@ struct addHouse: View {
                                 .frame(width: 150, height: 150)
                             VStack{
                                 HStack{
-                                    
-                                    //Text(house.time)
                                     Text(house.sell)
                                     Text(house.hsetype)
                                 }
@@ -42,20 +38,21 @@ struct addHouse: View {
                                 }
                             }.frame(height: 100)
                         }
-                        .navigationTitle("Manage Your House")
-                        .navigationBarItems(trailing: Button(action:{
-                            showPopup.toggle()
-                        }, label: {
-                            Image(systemName: "plus.app")
-                                .font(.system(size: 30))
-                        }))
-                    }
-                    .fullScreenCover(isPresented: $showPopup){
-                        NavigationStack{
-                            upload(showPopup: $showPopup)
-                        }
-                }
+
             }
+                .navigationBarTitle("Manage Your House")
+                .navigationBarItems(trailing: Button(action:{
+                    showPopup.toggle()
+                }, label: {
+                    Image(systemName: "plus.app")
+                        .font(.system(size: 30))
+                }))
+            }
+            .fullScreenCover(isPresented: $showPopup){
+                NavigationStack{
+                    upload(showPopup: $showPopup)
+                }
+        }
             .scrollContentBackground(.hidden)
         }
     }

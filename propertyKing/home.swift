@@ -24,7 +24,7 @@ struct home: View {
                 Image(systemName: "house.lodge.fill")
                 Text("Manage")
             }).tag(2)
-            Profile(showSignInView: .constant(false)).tabItem({
+            Profile(showSignInView: .constant(true)).tabItem({
                 Image(systemName: "person.circle")
                 Text("Profile")
             }).tag(2)

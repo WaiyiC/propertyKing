@@ -21,11 +21,15 @@ struct MyLocationView : View {
         VStack {
             if locationModel.authorizationStatus == .authorizedWhenInUse ||
                 locationModel.authorizationStatus == .authorizedAlways {
-                Map(coordinateRegion: $locationModel.coordinateRegion, showsUserLocation: true)
+                Map(initialPosition: .region(coordinateRegion)){
+                    Marker("Ravana Garden", coordinate: .RavanaGarden)
+                    Marker("Pictorial Garden", coordinate: .PictorialGarden)
+                }
                 .tint(.green)
                 .mapControls {
                     MapUserLocationButton()
                 }
+                
             } else {
                 Button("Request Permisison", action: {
                     locationModel.requestPermission()
@@ -36,6 +40,10 @@ struct MyLocationView : View {
     }
 }
 
+extension CLLocationCoordinate2D {
+    static let RavanaGarden = CLLocationCoordinate2D(latitude: 22.39129184745116, longitude:  114.20494235148799)
+    static let PictorialGarden = CLLocationCoordinate2D(latitude: 22.394555464118312,  longitude: 114.20777476396911)
+}
 struct MyLocationView_Previews : PreviewProvider {
     static var previews: some View {
         MyLocationView()

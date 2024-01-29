@@ -12,7 +12,7 @@ struct root: View {
     var body: some View {
         ZStack{
             NavigationStack{
-                home()
+                ContentView()
             }
         }
         .onAppear(){

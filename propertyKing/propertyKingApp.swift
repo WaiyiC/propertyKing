@@ -14,7 +14,7 @@ struct propertyKingApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     var body: some Scene {
         WindowGroup {
-            home()
+            Login(showSignInView: .constant(false))
                 .environmentObject(DataManager())
         }
     }

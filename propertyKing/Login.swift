@@ -100,6 +100,5 @@ struct Login: View {
                 }
             }
         }
-        .navigationBarHidden(/*@START_MENU_TOKEN@*/false/*@END_MENU_TOKEN@*/)
     }
 }
